@@ -1,0 +1,465 @@
+/* ============================================================
+   Expense & Budget Visualizer — styles
+   Tasks 10.1 · 10.2 · 10.3 · 10.4
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. CSS custom properties (colour palette + spacing)
+   ---------------------------------------------------------- */
+:root {
+    /* Colours */
+    --clr-bg: #f8f7f4;
+    --clr-surface: #ffffff;
+    --clr-border: #e0ddd8;
+    --clr-text: #1a1a1a;
+    --clr-text-muted: #6b6b6b;
+    --clr-accent: #d97706;
+    /* warm amber — buttons, focus rings */
+    --clr-accent-dark: #b45309;
+    --clr-danger: #dc2626;
+    /* error messages */
+    --clr-over-limit: #fef2f2;
+    /* over-limit row background */
+    --clr-over-limit-border: #fca5a5;
+    /* over-limit row border */
+    --clr-badge-bg: #dc2626;
+    --clr-badge-text: #ffffff;
+
+    /* Typography */
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+        sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+    /* Spacing scale */
+    --space-xs: 0.25rem;
+    /*  4px */
+    --space-sm: 0.5rem;
+    /*  8px */
+    --space-md: 1rem;
+    /* 16px */
+    --space-lg: 1.5rem;
+    /* 24px */
+    --space-xl: 2rem;
+    /* 32px */
+
+    /* Radii */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+}
+
+/* ----------------------------------------------------------
+   2. Reset / base
+   ---------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--clr-text);
+    background-color: var(--clr-bg);
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-md);
+}
+
+/* ----------------------------------------------------------
+   3. Header  (Task 10.1)
+   ---------------------------------------------------------- */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-xl);
+    background-color: var(--clr-surface);
+    border-bottom: 1px solid var(--clr-border);
+}
+
+#balance-display {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--clr-accent-dark);
+}
+
+/* ----------------------------------------------------------
+   4. Main two-column layout  (Task 10.1)
+   ---------------------------------------------------------- */
+main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-xl);
+    padding: var(--space-xl);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ----------------------------------------------------------
+   5. Input section (left column)  (Task 10.1 / 10.3)
+   ---------------------------------------------------------- */
+#input-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+#transaction-form,
+#category-section,
+#limit-section {
+    background-color: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+}
+
+/* ----------------------------------------------------------
+   6. Form groups, labels, inputs, selects  (Task 10.3)
+   ---------------------------------------------------------- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--clr-text);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.625rem var(--space-sm);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--clr-text);
+    background-color: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    /* Ensure minimum touch target height */
+    min-height: 44px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+}
+
+input::placeholder {
+    color: var(--clr-text-muted);
+}
+
+/* ----------------------------------------------------------
+   7. Buttons  (Task 10.3 / 10.4)
+   ---------------------------------------------------------- */
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    /* touch target */
+    min-width: 44px;
+    /* touch target */
+    padding: 0.625rem var(--space-md);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--clr-accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: var(--clr-accent-dark);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button:focus-visible {
+    outline: 3px solid var(--clr-accent);
+    outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------
+   8. Error messages  (Task 10.3)
+   ---------------------------------------------------------- */
+.error-msg {
+    font-size: 0.875rem;
+    color: var(--clr-danger);
+    min-height: 1.25rem;
+    /* prevent layout shift when text appears */
+    margin-top: var(--space-xs);
+}
+
+/* When the element has no text content it is invisible but still occupies
+   its min-height. JS sets textContent to show / clear the message. */
+
+/* ----------------------------------------------------------
+   9. Chart section (right column)  (Task 10.1)
+   ---------------------------------------------------------- */
+#chart-section {
+    background-color: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pie-chart {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ----------------------------------------------------------
+   10. List section — full width below main  (Task 10.1 / 10.2)
+   ---------------------------------------------------------- */
+#list-section {
+    max-width: 1200px;
+    margin: 0 auto var(--space-xl);
+    padding: 0 var(--space-xl);
+}
+
+/* Sort controls */
+#sort-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+}
+
+#sort-controls label {
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#sort-select {
+    width: auto;
+    min-width: 180px;
+}
+
+/* ----------------------------------------------------------
+   11. Transaction list  (Task 10.2)
+   ---------------------------------------------------------- */
+#transaction-list {
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    background-color: var(--clr-surface);
+}
+
+/* Scrollbar styling (Webkit) */
+#transaction-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#transaction-list::-webkit-scrollbar-track {
+    background: var(--clr-bg);
+}
+
+#transaction-list::-webkit-scrollbar-thumb {
+    background: var(--clr-border);
+    border-radius: 3px;
+}
+
+/* Individual list items */
+#transaction-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--clr-border);
+    transition: background-color 0.15s ease;
+}
+
+#transaction-list li:last-child {
+    border-bottom: none;
+}
+
+#transaction-list li:hover {
+    background-color: var(--clr-bg);
+}
+
+/* Transaction name */
+.transaction-name {
+    flex: 1 1 auto;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Transaction amount */
+.transaction-amount {
+    font-weight: 600;
+    color: var(--clr-accent-dark);
+    white-space: nowrap;
+}
+
+/* Transaction category */
+.transaction-category {
+    font-size: 0.8125rem;
+    color: var(--clr-text-muted);
+    background-color: var(--clr-bg);
+    border: 1px solid var(--clr-border);
+    border-radius: 999px;
+    padding: 0.125rem 0.5rem;
+    white-space: nowrap;
+}
+
+/* Delete button — compact, destructive style */
+.delete-btn {
+    flex-shrink: 0;
+    min-height: 44px;
+    /* touch target */
+    min-width: 44px;
+    /* touch target */
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--clr-danger);
+    background-color: transparent;
+    border: 1px solid var(--clr-danger);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.delete-btn:hover {
+    background-color: var(--clr-danger);
+    color: #ffffff;
+}
+
+.delete-btn:focus-visible {
+    outline: 3px solid var(--clr-danger);
+    outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------
+   12. Over-limit highlight  (Task 10.2)
+   ---------------------------------------------------------- */
+#transaction-list li.over-limit {
+    background-color: var(--clr-over-limit);
+    border-left: 4px solid var(--clr-badge-bg);
+}
+
+#transaction-list li.over-limit:hover {
+    background-color: #fee2e2;
+}
+
+/* Over-limit badge — JS sets display:'' to show, display:none to hide */
+.over-limit-badge {
+    display: none;
+    /* hidden by default; JS overrides per item */
+    flex-shrink: 0;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--clr-badge-text);
+    background-color: var(--clr-badge-bg);
+    border-radius: 999px;
+    padding: 0.125rem 0.5rem;
+    white-space: nowrap;
+}
+
+/* ----------------------------------------------------------
+   13. Empty state  (Task 10.2)
+   ---------------------------------------------------------- */
+#empty-state {
+    padding: var(--space-xl);
+    text-align: center;
+    color: var(--clr-text-muted);
+    font-style: italic;
+    font-size: 0.9375rem;
+}
+
+/* ----------------------------------------------------------
+   14. Responsive / mobile layout  (Task 10.4)
+   ---------------------------------------------------------- */
+@media (max-width: 600px) {
+
+    /* Stack the two-column main layout to a single column */
+    main {
+        grid-template-columns: 1fr;
+        padding: var(--space-md);
+        gap: var(--space-lg);
+    }
+
+    #list-section {
+        padding: 0 var(--space-md);
+        margin-bottom: var(--space-lg);
+    }
+
+    header {
+        padding: var(--space-md);
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Ensure all interactive elements meet 44×44 px touch target */
+    input[type="text"],
+    input[type="number"],
+    select,
+    button {
+        min-height: 44px;
+    }
+
+    /* Full-width buttons on mobile */
+    #transaction-form button,
+    #category-section button,
+    #limit-section button {
+        width: 100%;
+    }
+
+    /* Sort select full width on mobile */
+    #sort-select {
+        width: 100%;
+    }
+
+    /* Slightly smaller max-height for list on mobile */
+    #transaction-list {
+        max-height: 300px;
+    }
+}
